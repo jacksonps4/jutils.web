@@ -4,6 +4,7 @@ import java.util.ServiceLoader;
 
 import com.minorityhobbies.util.Dependencies;
 
+@Deprecated
 public class HttpModule extends Dependencies {
 	private final ServiceLoader<HttpServer> serverFactory = ServiceLoader
 			.load(HttpServer.class);
