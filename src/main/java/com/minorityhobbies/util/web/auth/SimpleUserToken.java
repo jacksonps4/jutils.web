@@ -1,6 +1,6 @@
 package com.minorityhobbies.util.web.auth;
 
-final class SimpleUserToken implements
+public final class SimpleUserToken implements
 		UserToken {
 	private final String tokenId;
 	private final String tokenSecret;

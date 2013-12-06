@@ -2,7 +2,7 @@ package com.minorityhobbies.util.web.auth;
 
 import java.util.Map;
 
-class SimpleHttpResponse implements HttpResponse {
+public class SimpleHttpResponse implements HttpResponse {
 	private final String message;
 	private final Map<String, String> headers;
 	private final String body;
@@ -15,15 +15,15 @@ class SimpleHttpResponse implements HttpResponse {
 		this.body = body;
 	}
 
-	public String getHttpMessage() {
+	public final String getHttpMessage() {
 		return message;
 	}
 
-	public Map<String, String> getHeaders() {
+	public final Map<String, String> getHeaders() {
 		return headers;
 	}
 
-	public String getBody() {
+	public final String getBody() {
 		return body;
 	}
 
