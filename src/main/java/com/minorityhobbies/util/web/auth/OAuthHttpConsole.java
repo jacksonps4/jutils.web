@@ -1,4 +1,4 @@
-package me.jacksonps4.web.auth;
+package com.minorityhobbies.util.web.auth;
 
 import java.io.BufferedReader;
 import java.io.File;
