@@ -2,7 +2,7 @@ package com.minorityhobbies.util.web.auth;
 
 import java.util.Properties;
 
-class AuthenticatedUserPropertiesFileRepository implements
+public class AuthenticatedUserPropertiesFileRepository implements
 		AuthenticatedUserRepository {
 	private final Properties userRepository;
 	

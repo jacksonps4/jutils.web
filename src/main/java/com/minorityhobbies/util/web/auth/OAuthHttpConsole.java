@@ -14,23 +14,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class OAuthHttpConsole {
-	private final AuthenticationService authService;
-	private final AuthenticatedUserRepository userRepository;
-
-	public OAuthHttpConsole(AuthenticationService authService,
-			AuthenticatedUserRepository userRepository) {
-		super();
-		this.authService = authService;
-		this.userRepository = userRepository;
-	}
-
-	public InputStream sendRequest(String verb, String url, String tokenKey,
-			String payload) {
-		UserToken accessToken = userRepository.getUserToken(tokenKey);
-		return authService.sendSignedRequestForStream(verb, url, accessToken,
-				payload);
-	}
-
 	public static void main(String[] args) throws IOException {
 		BufferedReader reader = null;
 		Properties props = new Properties();
@@ -43,7 +26,7 @@ class OAuthHttpConsole {
 
 			ObjectMapper mapper = new ObjectMapper();
 
-			OAuthHttpConsole console = new OAuthHttpConsole(
+			OAuthService service = new OAuthService(
 					new ScribeAuthenticationService(),
 					new AuthenticatedUserPropertiesFileRepository(props));
 			reader = new BufferedReader(new InputStreamReader(System.in));
@@ -66,7 +49,7 @@ class OAuthHttpConsole {
 							}
 						}
 
-						InputStream stream = console.sendRequest("GET",
+						InputStream stream = service.sendRequest("GET",
 								"https://api.twitter.com/1.1/users/lookup.json?screen_name="
 										+ usernames.toString(), tokenKey, null);
 						JsonNode node = mapper.readTree(stream);
@@ -86,7 +69,7 @@ class OAuthHttpConsole {
 				} else if ("home".equals(line)) {
 					InputStream stream = null;
 					try {
-						stream = console.sendRequest("GET", "https://userstream.twitter.com/1.1/user.json", tokenKey, null);
+						stream = service.sendRequest("GET", "https://userstream.twitter.com/1.1/user.json", tokenKey, null);
 						byte[] b = new byte[1024 * 64];
 						for (int read = 0; (read = stream.read(b)) > -1;) {
 							System.out.print(new String(b, 0, read));
@@ -120,7 +103,7 @@ class OAuthHttpConsole {
 							data = payload.toString();
 						}
 
-						InputStream stream = console.sendRequest(verb, url,
+						InputStream stream = service.sendRequest(verb, url,
 								tokenKey, data);
 
 						byte[] b = new byte[1024 * 64];
