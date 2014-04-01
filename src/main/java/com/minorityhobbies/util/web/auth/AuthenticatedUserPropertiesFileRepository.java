@@ -15,6 +15,10 @@ public class AuthenticatedUserPropertiesFileRepository implements
 	public UserToken getUserToken(String tokenKey) {
 		String tokenId = userRepository.getProperty(String.format("%s.twitter.accessToken", tokenKey));
 		String tokenSecret = userRepository.getProperty(String.format("%s.twitter.secret", tokenKey));
-		return new SimpleUserToken(tokenId, tokenSecret);
+		if (tokenId != null && tokenSecret != null) {
+			return new SimpleUserToken(tokenId, tokenSecret);
+		} else {
+			return null;
+		}
 	}
 }

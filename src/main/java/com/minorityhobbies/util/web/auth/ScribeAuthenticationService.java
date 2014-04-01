@@ -26,7 +26,7 @@ final class ScribeAuthenticationService implements
 		String apiSecret = auth.getString("twitter.api.secret");
 		apiCallbackUrl = auth.getString("twitter.callback.url");
 
-		service = new ServiceBuilder().provider(TwitterApi.class)
+		service = new ServiceBuilder().provider(TwitterApi.SSL.class)
 				.apiKey(apiKey).apiSecret(apiSecret)
 				.callback(apiCallbackUrl).build();
 	}
