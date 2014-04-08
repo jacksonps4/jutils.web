@@ -1,10 +1,14 @@
 package com.minorityhobbies.util.web.auth;
 
-import com.google.inject.AbstractModule;
+public class AuthenticationModule {
+	private final AuthenticationService authenticationService;
 
-public class AuthenticationModule extends AbstractModule {
-	@Override
-	protected void configure() {
-		bind(AuthenticationService.class).to(ScribeAuthenticationService.class);
+	public AuthenticationModule(AuthenticationService authenticationService) {
+		super();
+		this.authenticationService = new ScribeAuthenticationService();
+	}
+
+	public AuthenticationService getAuthenticationService() {
+		return authenticationService;
 	}
 }
