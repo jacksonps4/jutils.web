@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.OAuthRequest;
@@ -13,7 +16,9 @@ import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
-final class ScribeAuthenticationService implements
+@Singleton
+@Startup
+public final class ScribeAuthenticationService implements
 		AuthenticationService {
 	private final OAuthService service;
 	private final ResourceBundle auth;
